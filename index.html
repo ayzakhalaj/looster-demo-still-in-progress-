@@ -1,0 +1,2245 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لوستر پلاس</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/vazirmatn@3.3.0/Vazirmatn-font-face.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <header class="bg-white border-bottom sticky-top shadow-sm">
+      <div class="container-fluid px-4 py-3">
+        <div class="row align-items-center g-3">
+          <div class="col-6 col-lg-3 d-flex align-items-center gap-2">
+            <div class="fs-3 fw-black text-dark d-flex align-items-center">
+              <h1 class="fs-3 fw-black text-dark d-flex align-items-center">
+                <span>لوستر</span
+                ><span class="text-warning fw-bold font-monospace me-1"
+                  >پلاس</span
+                >
+              </h1>
+            </div>
+          </div>
+
+          <div class="col-lg-6 d-none d-lg-block">
+            <div class="position-relative">
+              <input
+                type="text"
+                id="searchInput"
+                class="form-control rounded-pill py-2.5 pe-4 ps-5 border-2 border-light-subtle"
+                placeholder="جستجو برای محصولات..."
+                autocomplete="off"
+              />
+              <button
+                class="btn position-absolute top-50 start-0 translate-middle-y text-secondary ms-3"
+                type="button"
+                id="searchButton"
+              >
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+              <div
+                id="searchResults"
+                class="search-results-container"
+                style="display: none"
+              ></div>
+            </div>
+          </div>
+
+          <div
+            class="col-6 col-lg-3 d-flex align-items-center justify-content-end gap-2"
+          >
+            <div class="dropdown">
+              <button
+                class="btn custom-header-btn p-0"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="fa-regular fa-user fs-5"></i>
+              </button>
+              <ul
+                class="dropdown-menu dropdown-menu-end custom-user-dropdown shadow-sm"
+              >
+                <li>
+                  <a class="dropdown-item" href="#">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>پیشخوان</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>علاقه‌مندی‌ها</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>لیست سفارشات</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>آدرس‌های شما</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>کیف پول من</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>ویرایش مشخصات</span>
+                  </a>
+                </li>
+                <li><hr class="dropdown-divider my-1" /></li>
+                <li>
+                  <a class="dropdown-item text-danger" href="#">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span class="fw-bold">خروج از حساب</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="dropdown">
+              <button
+                class="btn custom-header-btn p-0 dropdown-toggle"
+                type="button"
+                data-bs-toggle="dropdown"
+                data-bs-auto-close="outside"
+                aria-expanded="false"
+                style="position: relative"
+              >
+                <i class="fa-solid fa-shopping-cart fs-5"></i>
+                <span
+                  class="badge bg-danger rounded-pill cart-badge"
+                  style="
+                    position: absolute;
+                    top: -5px;
+                    right: -5px;
+                    font-size: 10px;
+                  "
+                  >0</span
+                >
+              </button>
+              <div
+                class="dropdown-menu dropdown-menu-end cart-dropdown p-3"
+                style="min-width: 300px; max-height: 400px; overflow-y: auto"
+              >
+                <div id="cartItems">سبد خرید خالی است</div>
+              </div>
+            </div>
+
+            <button
+              class="btn d-lg-none custom-header-btn p-0 text-dark burger"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#mobileMenu"
+            >
+              <i class="fa-solid fa-bars fs-5"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-top d-none d-lg-block">
+        <div class="container-fluid px-4">
+          <div class="d-flex align-items-center justify-content-between">
+            <nav class="navbar navbar-expand-lg p-0">
+              <ul class="navbar-nav gap-2">
+                <li class="nav-item dropdown">
+                  <a class="nav-link py-3 text-dark fw-medium" href="#">
+                    <i class="fa-solid fa-chair text-muted me-1"></i> لوسترها
+                    <i
+                      class="fa-solid fa-chevron-down ms-1"
+                      style="font-size: 9px"
+                    ></i>
+                  </a>
+                  <div class="dropdown-menu">
+                    <div class="row g-4">
+                      <div class="col-3">
+                        <h6 class="fw-bold border-bottom pb-2 mb-2">
+                          لوستر پذیرایی
+                        </h6>
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >لوستر مدرن</a
+                        >
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >لوستر کلاسیک</a
+                        >
+                      </div>
+                      <div class="col-3">
+                        <h6 class="fw-bold border-bottom pb-2 mb-2">
+                          لوستر اداری
+                        </h6>
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >لوستر مدیریتی</a
+                        >
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >ارگونومیک</a
+                        >
+                      </div>
+                      <div class="col-3">
+                        <h6 class="fw-bold border-bottom pb-2 mb-2">
+                          آشپزخانه
+                        </h6>
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >لوستر اپن</a
+                        >
+                      </div>
+                      <div
+                        class="col-3 bg-light rounded p-3 text-center d-flex flex-column justify-content-center"
+                      >
+                        <h6 class="fw-bold text-dark mb-0">تخفیفات فصل چوب</h6>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link py-3 text-dark fw-medium" href="#">
+                    <i class="fa-solid fa-table text-muted me-1"></i> میزها
+                    <i
+                      class="fa-solid fa-chevron-down ms-1"
+                      style="font-size: 9px"
+                    ></i>
+                  </a>
+                  <div class="dropdown-menu">
+                    <div class="row g-4">
+                      <div class="col-4">
+                        <h6 class="fw-bold border-bottom pb-2 mb-2">
+                          لوستر غذاخوری
+                        </h6>
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >۴ نفره مینیمال</a
+                        >
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >۶ نفره چوبی</a
+                        >
+                      </div>
+                      <div class="col-4">
+                        <h6 class="fw-bold border-bottom pb-2 mb-2">
+                          لوستر کار
+                        </h6>
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >میز تحریر خلوت</a
+                        >
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >میز کامپیوتر</a
+                        >
+                      </div>
+                      <div
+                        class="col-4 bg-warning-subtle rounded p-3 text-center"
+                      >
+                        <h6 class="fw-bold mb-0">ارسال فوق‌سریع</h6>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link py-3 text-dark fw-medium" href="#">
+                    <i class="fa-solid fa-couch text-muted me-1"></i> مبل‌ها
+                    <i
+                      class="fa-solid fa-chevron-down ms-1"
+                      style="font-size: 9px"
+                    ></i>
+                  </a>
+                  <div class="dropdown-menu">
+                    <div class="row g-4">
+                      <div class="col-6">
+                        <h6 class="fw-bold border-bottom pb-2 mb-2">
+                          ست مبلمان کینگ
+                        </h6>
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >راحتی ال شکل</a
+                        >
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >مبلمان چرمی تک</a
+                        >
+                      </div>
+                      <div class="col-6">
+                        <h6 class="fw-bold border-bottom pb-2 mb-2">
+                          کوسن و لوازم
+                        </h6>
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >کوسن‌های فانتزی</a
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link py-3 text-dark fw-medium" href="#">
+                    <i class="fa-solid fa-boxes-stacked text-muted me-1"></i>
+                    کمد و قفسه
+                    <i
+                      class="fa-solid fa-chevron-down ms-1"
+                      style="font-size: 9px"
+                    ></i>
+                  </a>
+                  <div class="dropdown-menu">
+                    <div class="row g-4">
+                      <div class="col-4">
+                        <h6 class="fw-bold border-bottom pb-2 mb-2">
+                          کمد دیواری و لباس
+                        </h6>
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >کمد ریلی مدرن</a
+                        >
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >جاکفشی چوبی</a
+                        >
+                      </div>
+                      <div class="col-4">
+                        <h6 class="fw-bold border-bottom pb-2 mb-2">
+                          قفسه و کتابخانه
+                        </h6>
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >کتابخانه مینیمال</a
+                        >
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >شلف دیواری</a
+                        >
+                      </div>
+                      <div class="col-4 bg-light rounded p-3 text-center">
+                        <h6 class="fw-bold text-success mb-1">کمد هدیه سال</h6>
+                        <p class="fs-6 text-muted mb-0">
+                          با خرید کمد ریلی، شلف دیواری هدیه بگیرید
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+
+                <!-- <li class="nav-item dropdown">
+                  <a class="nav-link py-3 text-dark fw-medium" href="#">
+                    <i class="fa-solid fa-lightbulb text-muted me-1"></i>
+                    نورپردازی
+                    <i
+                      class="fa-solid fa-chevron-down ms-1"
+                      style="font-size: 9px"
+                    ></i>
+                  </a>
+                  <div class="dropdown-menu">
+                    <div class="row g-4">
+                      <div class="col-4">
+                        <h6 class="fw-bold border-bottom pb-2 mb-2">لوسترها</h6>
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >لوستر سقفی مدرن</a
+                        >
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >لوستر آشپزخانه</a
+                        >
+                      </div>
+                      <div class="col-4">
+                        <h6 class="fw-bold border-bottom pb-2 mb-2">
+                          روشنایی ایستاده
+                        </h6>
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >آباژور ایستاده</a
+                        >
+                        <a class="dropdown-item py-1 fs-6" href="#"
+                          >چراغ مطالعه رومیزی</a
+                        >
+                      </div>
+                      <div
+                        class="col-4 bg-danger-subtle rounded p-3 text-center"
+                      >
+                        <h6 class="fw-bold text-danger mb-0">
+                          روشنایی‌های هوشمند ۲۰۲۶
+                        </h6>
+                      </div>
+                    </div>
+                  </div>
+                </li> -->
+              </ul>
+            </nav>
+
+            <div
+              class="badge bg-info-subtle text-info-emphasis rounded-pill px-3 py-2 fs-6 fw-semibold"
+            >
+              ارسال رایگان برای سفارش‌های بالای ۱۳,۰۰۰,۰۰۰ تومان
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div
+      class="offcanvas offcanvas-start lg-none"
+      tabindex="-1"
+      id="mobileMenu"
+      aria-labelledby="mobileMenuLabel"
+    >
+      <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title fw-bold" id="mobileMenuLabel">
+          دسته‌بندی محصولات
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="position-relative mb-4">
+          <input
+            type="text"
+            id="mobileSearchInput"
+            class="form-control rounded py-2 pe-3 ps-5 bg-light border-0"
+            placeholder="جستجو..."
+            autocomplete="off"
+          />
+          <i
+            class="fa-solid fa-magnifying-glass position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"
+          ></i>
+          <div
+            id="mobileSearchResults"
+            class="search-results-container"
+            style="
+              display: none;
+              position: relative;
+              box-shadow: none;
+              border: none;
+              max-height: 300px;
+            "
+          ></div>
+        </div>
+
+        <div class="accordion accordion-flush" id="accordionMobile">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed fw-medium"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseOne"
+              >
+                <i class="fa-solid fa-chair text-muted me-2"></i> صندلی‌ها
+              </button>
+            </h2>
+            <div
+              id="flush-collapseOne"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionMobile"
+            >
+              <div class="accordion-body d-flex flex-column gap-2 py-2">
+                <a
+                  href="#"
+                  class="text-decoration-none text-secondary ps-3 fs-6"
+                  >صندلی مدرن</a
+                >
+                <a
+                  href="#"
+                  class="text-decoration-none text-secondary ps-3 fs-6"
+                  >صندلی اداری</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed fw-medium"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseTwo"
+              >
+                <i class="fa-solid fa-table text-muted me-2"></i> میزها
+              </button>
+            </h2>
+            <div
+              id="flush-collapseTwo"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionMobile"
+            >
+              <div class="accordion-body d-flex flex-column gap-2 py-2">
+                <a
+                  href="#"
+                  class="text-decoration-none text-secondary ps-3 fs-6"
+                  >میز غذاخوری</a
+                >
+                <a
+                  href="#"
+                  class="text-decoration-none text-secondary ps-3 fs-6"
+                  >میز تحریر</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed fw-medium"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseThree"
+              >
+                <i class="fa-solid fa-couch text-muted me-2"></i> مبل‌ها
+              </button>
+            </h2>
+            <div
+              id="flush-collapseThree"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionMobile"
+            >
+              <div class="accordion-body d-flex flex-column gap-2 py-2">
+                <a
+                  href="#"
+                  class="text-decoration-none text-secondary ps-3 fs-6"
+                  >مبلمان راحتی</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed fw-medium"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseFour"
+              >
+                <i class="fa-solid fa-boxes-stacked text-muted me-2"></i> کمد و
+                قفسه
+              </button>
+            </h2>
+            <div
+              id="flush-collapseFour"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionMobile"
+            >
+              <div class="accordion-body d-flex flex-column gap-2 py-2">
+                <a
+                  href="#"
+                  class="text-decoration-none text-secondary ps-3 fs-6"
+                  >کمد ریلی لباس</a
+                >
+                <a
+                  href="#"
+                  class="text-decoration-none text-secondary ps-3 fs-6"
+                  >کتابخانه و شلف</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button
+                class="accordion-button collapsed fw-medium"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#flush-collapseFive"
+              >
+                <i class="fa-solid fa-lightbulb text-muted me-2"></i> نورپردازی
+              </button>
+            </h2>
+            <div
+              id="flush-collapseFive"
+              class="accordion-collapse collapse"
+              data-bs-parent="#accordionMobile"
+            >
+              <div class="accordion-body d-flex flex-column gap-2 py-2">
+                <a
+                  href="#"
+                  class="text-decoration-none text-secondary ps-3 fs-6"
+                  >لوسترهای مدرن</a
+                >
+                <a
+                  href="#"
+                  class="text-decoration-none text-secondary ps-3 fs-6"
+                  >آباژور و چراغ رومیزی</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- main hero -->
+
+    <section class="container-fluid my-2">
+      <div class="parent">
+        <div class="div3">
+          <div
+            id="carouselExampleSlidesOnly"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img
+                  src="./img/Screenshot78.png"
+                  class="d-block w-100"
+                  alt="..."
+                  loading="lazy"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="./img/Screenshot79.png"
+                  class="d-block w-100"
+                  alt="..."
+                  loading="lazy"
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  src="./img/Screenshot80.png"
+                  class="d-block w-100"
+                  alt="..."
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="div4">
+          <h2 class="card-title text-center text-warning font-monospace">
+            لوستر سقفی مدرن
+          </h2>
+        </div>
+        <div class="div5">
+          <h5 class="card-title text-center text-warning font-monospace">
+            لوستر سقفی مدرن
+          </h5>
+        </div>
+        <div class="div6">
+          <h5 class="card-title text-center text-warning font-monospace">
+            لوستر سقفی مدرن
+          </h5>
+        </div>
+        <!-- <div class="div7">7</div>
+        <div class="div8">8</div> -->
+      </div>
+    </section>
+
+    <section class="container-fluid py-3">
+      <div class="row g-3">
+        <!-- Feature 1 -->
+        <div class="col-6 col-md-3">
+          <div class="feature-item truck-deliver">
+            <i class="fa-solid fa-truck-fast"></i>
+            <div>
+              <h6>ارسال فوق‌سریع</h6>
+              <p>تحویل ۲۴ تا ۷۲ ساعته در سراسر کشور</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="col-6 col-md-3">
+          <div class="feature-item sheild">
+            <i class="fa-solid fa-shield-halved"></i>
+            <div>
+              <h6>۱۸ ماه گارانتی</h6>
+              <p>پشتیبانی و تعویض قطعات معیوب</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="col-6 col-md-3 col-sm-12">
+          <div class="feature-item refresh-arrow">
+            <i class="fa-solid fa-rotate-left"></i>
+            <div>
+              <h6>۷ روز ضمانت بازگشت</h6>
+              <p>خرید بدون ریسک و با اطمینان کامل</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="col-6 col-md-3 col-sm-12">
+          <div class="feature-item headset">
+            <i class="fa-solid fa-headset"></i>
+            <div>
+              <h6>پشتیبانی ۲۴ ساعته</h6>
+              <p>مشاوره رایگان قبل و بعد از خرید</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- products sliders -->
+    <section class="container-fluid py-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="slider-header">
+          جدیدترین لوستر <span class="text-warning">مدرن</span>
+        </h2>
+        <div class="swiper-btn d-flex">
+          <div class="swiper-prev">
+            <i class="fa-solid fa-caret-right"></i>
+          </div>
+          <div class="swiper-next">
+            <i class="fa-solid fa-caret-left"></i>
+          </div>
+          <a
+            href="/products-category/modern/products-category-modern.html"
+            class="btn btn-outline-warning"
+            >مشاهده همه</a
+          >
+        </div>
+      </div>
+      <div class="swiper myProductsSwiper">
+        <!-- Swiper Wrapper -->
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="48000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="modern"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+مدرن"
+                    alt="لوستر مدرن"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">48,000,000 تومان</div>
+                  <p>لوستر مدرن طلایی</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="48000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="modern"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+مدرن"
+                    alt="لوستر مدرن"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">48,000,000 تومان</div>
+                  <p>لوستر مدرن نقره ای</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="48000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="modern"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+مدرن"
+                    alt="لوستر مدرن"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">48,000,000 تومان</div>
+                  <p>لوستر مدرن زرد</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="42000000"
+              data-date="2026-05-15"
+              data-most-sold="50"
+              data-favorites="14"
+              data-category="modern"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+مدرن"
+                    alt="لوستر مدرن"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">42,000,000 تومان</div>
+                  <p>لوستر مدرن سبز</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="38000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="modern"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+مدرن"
+                    alt="لوستر مدرن"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">48,000,000 تومان</div>
+                  <p>لوستر مدرن آبی</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="48000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="modern"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+مدرن"
+                    alt="لوستر مدرن"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">48,000,000 تومان</div>
+                  <p>لوستر مدرن بنفش</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="48000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="modern"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+مدرن"
+                    alt="لوستر مدرن"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">48,000,000 تومان</div>
+                  <p>لوستر مدرن ندومیه</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="48000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="modern"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+مدرن"
+                    alt="لوستر مدرن"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">48,000,000 تومان</div>
+                  <p>لوستر مدرن طلایی</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- products sliders -->
+    <section class="container-fluid py-4 kitchen-slider">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="slider-header">
+          جدیدترین لوستر <span class="text-warning"> آشپزخانه</span>
+        </h2>
+        <div class="swiper-btn">
+          <div class="swiper-prev-1">
+            <i class="fa-solid fa-caret-right"></i>
+          </div>
+          <div class="swiper-next-1">
+            <i class="fa-solid fa-caret-left"></i>
+          </div>
+          <a
+            href="/products-category/kitchen/products-category-kitchen.html"
+            class="btn btn-outline-warning"
+            >مشاهده همه</a
+          >
+        </div>
+      </div>
+      <div class="swiper1 myProductsSwiper1">
+        <!-- Swiper Wrapper -->
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="28000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="kitchen"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+مدرن"
+                    alt="لوستر مدرن"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">28,000,000 تومان</div>
+                  <p>لوستر آشپزخانه زرد</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="48000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="kitchen"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+آشپزخانه"
+                    alt="لوستر آشپزخانه"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">48,000,000 تومان</div>
+                  <p>لوستر آشپزخانه نقره ای</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="38000000"
+              data-date="2026-05-15"
+              data-most-sold="20"
+              data-favorites="31"
+              data-category="kitchen"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+آشپزخانه"
+                    alt="لوستر آشپزخانه"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">38,000,000 تومان</div>
+                  <p>لوستر آشپزخانه سبز</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="48000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="kitchen"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+آشپزخانه"
+                    alt="لوستر آشپزخانه"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">48,000,000 تومان</div>
+                  <p>لوستر آشپزخانه قرمز</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="48000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="kitchen"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+آشپزخانه"
+                    alt="لوستر آشپزخانه"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">48,000,000 تومان</div>
+                  <p>لوستر آشپزخانه ندومیه</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="48000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="kitchen"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+آشپزخانه"
+                    alt="لوستر آشپزخانه"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">21,000,000 تومان</div>
+                  <p>لوستر آشپزخانه طلایی</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="48000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="kitchen"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+آشپزخانه"
+                    alt="لوستر آشپزخانه"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">48,000,000 تومان</div>
+                  <p>لوستر آشپزخانه طلایی</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="35000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="kitchen"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+آشپزخانه"
+                    alt="لوستر آشپزخانه"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">35,000,000 تومان</div>
+                  <p>لوستر آشپزخانه طلایی</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- cards -->
+    <section class="container-fluid py-4">
+      <div class="row g-3">
+        <!-- Card 1 -->
+        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+          <div class="preview-card preview-card-1">
+            <h2 class="card-title text-center text-warning font-monospace">
+              لوستر سقفی مدرن
+            </h2>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+          <div class="preview-card preview-card-2">
+            <h2 class="card-title text-center text-warning font-monospace">
+              لوستر آشپزخانه
+            </h2>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+          <div class="preview-card preview-card-3">
+            <h2 class="card-title text-center text-warning font-monospace">
+              لوستر اپن
+            </h2>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+          <div class="preview-card preview-card-4">
+            <h2 class="card-title text-center text-warning font-monospace">
+              لوستر سنتی
+            </h2>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- products sliders -->
+    <section class="container-fluid py-4 classic-slider">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="slider-header">
+          جدیدترین لوستر <span class="text-warning"> کلاسیک</span>
+        </h2>
+        <div class="swiper-btn">
+          <div class="swiper-prev-classic">
+            <i class="fa-solid fa-caret-right"></i>
+          </div>
+          <div class="swiper-next-classic">
+            <i class="fa-solid fa-caret-left"></i>
+          </div>
+          <a href="#" class="btn btn-outline-warning">مشاهده همه</a>
+        </div>
+      </div>
+      <div class="swiper myProductsSwiper-classic">
+        <!-- Swiper Wrapper -->
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="38000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="classic"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+مدرن"
+                    alt="لوستر مدرن"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">38,000,000 تومان</div>
+                  <p>لوستر کلاسیک زرد</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="48000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="classic"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+کلاسیک"
+                    alt="لوستر کلاسیک"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">48,000,000 تومان</div>
+                  <p>لوستر کلاسیک نقره ای</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="33000000"
+              data-date="2026-05-15"
+              data-most-sold="90"
+              data-favorites="34"
+              data-category="classic"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+کلاسیک"
+                    alt="لوستر کلاسیک"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">33,000,000 تومان</div>
+                  <p>لوستر کلاسیک سبز</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="48000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="classic"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+کلاسیک"
+                    alt="لوستر کلاسیک"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">48,000,000 تومان</div>
+                  <p>لوستر کلاسیک قرمز</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="48000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="classic"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+کلاسیک"
+                    alt="لوستر کلاسیک"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">48,000,000 تومان</div>
+                  <p>لوستر کلاسیک ندومیه</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="48000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="classic"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+کلاسیک"
+                    alt="لوستر کلاسیک"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">48,000,000 تومان</div>
+                  <p>لوستر کلاسیک طلایی</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="48000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="classic"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+کلاسیک"
+                    alt="لوستر کلاسیک"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">48,000,000 تومان</div>
+                  <p>لوستر کلاسیک طلایی</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div
+              class="col product-wrapper-item"
+              data-price="48000000"
+              data-date="2026-05-15"
+              data-most-sold="120"
+              data-favorites="34"
+              data-category="classic"
+            >
+              <div class="products">
+                <div class="pr-img">
+                  <img
+                    src="https://placehold.co/400x400/eee/333?text=لوستر+آشپزخانه"
+                    alt="لوستر آشپزخانه"
+                    loading="lazy"
+                  />
+                  <div class="tags">
+                    <div class="nav-btn bg-warning">
+                      <a href="#">افزودن به سبد خرید</a>
+                    </div>
+                    <ul class="share-pr">
+                      <li>
+                        <a href="#"><i class="fa-solid fa-heart"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-bag-shopping"></i></a>
+                      </li>
+                      <li>
+                        <a href="#"><i class="fa-solid fa-eye"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="rating">
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i
+                    ><i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                  </div>
+                </div>
+                <div class="pr-text">
+                  <div class="price text-warning">48,000,000 تومان</div>
+                  <p>لوستر کلاسیک طلایی</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- cards -->
+    <section class="container-fluid py-1">
+      <div class="cards-header p-3 mb-3">
+        <h3><span class="text-warning">برند</span>های معتبر</h3>
+      </div>
+      <div class="row g-3">
+        <!-- Card 1 -->
+        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+          <div class="preview-card preview-card-1">
+            <h2 class="card-title text-center text-warning font-monospace">
+              لوستر سقفی مدرن
+            </h2>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+          <div class="preview-card preview-card-2">
+            <h2 class="card-title text-center text-warning font-monospace">
+              لوستر ارگونومیک
+            </h2>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+          <div class="preview-card preview-card-3">
+            <h2 class="card-title text-center text-warning font-monospace">
+              لوستر اپن
+            </h2>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="col-lg-3 col-md-3 col-sm-6 col-12">
+          <div class="preview-card preview-card-4">
+            <h2 class="card-title text-center text-warning font-monospace">
+              لوستر مدیریتی
+            </h2>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- seasonal off -->
+    <section class="container-fluid py-3">
+      <div class="newsletter-banner">
+        <div class="newsletter-content">
+          <h3>از تخفیف‌های فصلی لوستر پلاس باخبر شوید</h3>
+          <p>
+            ایمیل‌تان را وارد کنید تا کد تخفیف ۱۰٪ اولین خرید برایتان ارسال شود.
+          </p>
+        </div>
+        <form class="newsletter-form" id="newsletterForm">
+          <input
+            type="email"
+            class="form-control"
+            placeholder="ایمیل شما"
+            required
+          />
+          <button type="submit" class="btn btn-dark">عضویت در خبرنامه</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- comments -->
+    <section class="container-fluid py-5 testimonial-section">
+      <div class="d-flex justify-content-between align-items-center mb-4 px-3">
+        <div>
+          <span class="eyebrow">نظر مشتریان</span>
+          <h2 class="slider-header mb-0">
+            چرا مشتری‌ها <span class="text-warning">لوستر پلاس</span> را انتخاب
+            می‌کنند
+          </h2>
+        </div>
+        <div class="swiper-btn d-none d-md-flex">
+          <div class="swiper-prev-cm">
+            <i class="fa-solid fa-caret-right"></i>
+          </div>
+          <div class="swiper-next-cm">
+            <i class="fa-solid fa-caret-left"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="swiper myTestimonialSwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                کیفیت لوستری که برای پذیرایی خونمون خریدم فوق‌العاده بود.
+                بسته‌بندی حرفه‌ای و نصبش هم خیلی راحت بود. قطعا دوباره خرید
+                می‌کنم.
+              </p>
+              <div class="testimonial-user">
+                <div class="testimonial-avatar">ن.م</div>
+                <div>
+                  <h6>نگار محمدی</h6>
+                  <span>تهران</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star-half-stroke"></i>
+              </div>
+              <p class="testimonial-text">
+                نور لوستر آشپزخونه دقیقا همون چیزی بود که تو عکس‌های سایت دیدم.
+                پشتیبانی هم قبل از خرید خیلی کمک کرد تا مدل مناسب رو انتخاب کنم.
+              </p>
+              <div class="testimonial-user">
+                <div class="testimonial-avatar">ع.ک</div>
+                <div>
+                  <h6>علی کریمی</h6>
+                  <span>اصفهان</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                ارسال سریع‌تر از چیزی بود که فکر می‌کردم. کیفیت ساخت لوستر مدرن
+                که سفارش دادم عالیه و با دکور خونه‌مون خیلی خوب جفت‌وجور شده.
+              </p>
+              <div class="testimonial-user">
+                <div class="testimonial-avatar">س.ر</div>
+                <div>
+                  <h6>سارا رضایی</h6>
+                  <span>شیراز</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                برای دفتر کارمون چند تا لوستر اداری سفارش دادیم. هم قیمت مناسب
+                بود هم کیفیت نوردهی که برای کار طولانی خیلی مهمه.
+              </p>
+              <div class="testimonial-user">
+                <div class="testimonial-avatar">م.ح</div>
+                <div>
+                  <h6>مهدی حسینی</h6>
+                  <span>مشهد</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                کیفیت لوستری که برای پذیرایی خونمون خریدم فوق‌العاده بود.
+                بسته‌بندی حرفه‌ای و نصبش هم خیلی راحت بود. قطعا دوباره خرید
+                می‌کنم.
+              </p>
+              <div class="testimonial-user">
+                <div class="testimonial-avatar">ن.م</div>
+                <div>
+                  <h6>نگار محمدی</h6>
+                  <span>تهران</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="testimonial-card">
+              <div class="testimonial-stars">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <p class="testimonial-text">
+                ارسال سریع‌تر از چیزی بود که فکر می‌کردم. کیفیت ساخت لوستر مدرن
+                که سفارش دادم عالیه و با دکور خونه‌مون خیلی خوب جفت‌وجور شده.
+              </p>
+              <div class="testimonial-user">
+                <div class="testimonial-avatar">س.ر</div>
+                <div>
+                  <h6>سارا رضایی</h6>
+                  <span>شیراز</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="site-footer">
+      <div class="container-fluid px-4 py-5">
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6">
+            <div
+              class="fs-3 fw-black text-white d-flex align-items-center mb-3"
+            >
+              <span>لوستر</span
+              ><span class="text-warning fw-bold font-monospace me-1"
+                >پلاس
+              </span>
+            </div>
+            <p class="footer-about">
+              تولید و فروش تخصصی لوستر، روشنایی و دکوراسیون داخلی با تمرکز بر
+              کیفیت ساخت و طراحی متناسب با معماری امروز.
+            </p>
+            <ul class="footer-social">
+              <li>
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fa-brands fa-telegram"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+              </li>
+              <li>
+                <a href="#"><i class="fa-brands fa-google"></i></a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-6 col-6">
+            <h6 class="footer-title">دسته‌بندی‌ها</h6>
+            <ul class="footer-links">
+              <li><a href="#">لوسترها</a></li>
+              <li><a href="#">میزها</a></li>
+              <li><a href="#">مبل‌ها</a></li>
+              <li><a href="#">کمد و قفسه</a></li>
+              <li><a href="#">نورپردازی</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-6 col-6">
+            <h6 class="footer-title">لوستر پلاس</h6>
+            <ul class="footer-links">
+              <li><a href="#">درباره ما</a></li>
+              <li><a href="#">وبلاگ</a></li>
+              <li><a href="#">فرصت‌های شغلی</a></li>
+              <li><a href="#">تماس با ما</a></li>
+              <li><a href="#">قوانین و مقررات</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+            <h6 class="footer-title">اطلاعات تماس</h6>
+            <ul class="footer-contact">
+              <li>
+                <i class="fa-solid fa-location-dot"></i>
+                <span>ساری, خیابان پیام نور، پلاک ۱۲</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-phone"></i>
+                <span>۰۱۱-۳۳۲۴۵۶۷۸</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-envelope"></i>
+                <span>info@lusterplus.ir</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-clock"></i>
+                <span>شنبه تا پنج‌شنبه، ۹ تا ۱۸</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div
+          class="container-fluid px-4 d-flex flex-wrap justify-content-between align-items-center gap-2"
+        >
+          <p class="mb-0">© ۱۴۰۵ لوستر پلاس. تمامی حقوق محفوظ است.</p>
+          <div class="payment-icons">
+            <i class="fa-solid fa-lock"></i>
+            <span>پرداخت امن با درگاه بانکی معتبر</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
